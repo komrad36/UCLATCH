@@ -2,7 +2,7 @@ Fastest implementation of an UPRIGHT (no rotation) LATCH 512-bit binary feature 
 
 "LATCH: Learned Arrangements of Three Patch Codes" http://arxiv.org/abs/1501.03719
 
-See also the ECCV 2016 paper, of which I am a coauthor:
+See also the ECCV 2016 Descriptor Workshop paper, of which I am a coauthor:
 
 "The CUDA LATCH Binary Descriptor"
 
