@@ -1,0 +1,8 @@
+*
+!.gitignore
+!test.jpg
+!UCLATCH.cu
+!UCLATCH.h
+!Makefile
+!main.cpp
+!README.md
