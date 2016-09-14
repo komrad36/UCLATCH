@@ -25,8 +25,9 @@
 // And the original LATCH project's website:
 // http://www.openu.ac.il/home/hassner/projects/LATCH/
 //
-// Note once again that this is an UPRIGHT LATCH, a.k.a. ULATCH.
-// A fast rotation- and scale-invariant version is in the works.
+// Note once again that this is an UPRIGHT CUDA LATCH, a.k.a. UCLATCH.
+// A fast rotation- and scale-invariant version is
+// also available on my GitHub.
 //
 // This implementation is insanely fast, matching or beating
 // the much simpler ORB descriptor despite outputting twice
