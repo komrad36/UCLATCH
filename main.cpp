@@ -77,6 +77,7 @@ int main() {
 	cv::Ptr<cv::ORB> orb = cv::ORB::create(numkps, 1.2f, 8, 31, 0, 2, cv::ORB::HARRIS_SCORE, 31, 20);
 	std::vector<cv::KeyPoint> keypoints;
 	orb->detect(image, keypoints);
+	keypoints.erase(std::remove_if(keypoints.begin(), keypoints.end(), [image](const cv::KeyPoint& kp) {return kp.pt.x <= 36 || kp.pt.y <= 36 || kp.pt.x >= image.cols - 36 || kp.pt.y >= image.rows - 36; }), keypoints.end());
 	// --------------------------------
 
 
@@ -172,5 +173,5 @@ int main() {
 
 	long long total = 0;
 	for (size_t i = 0; i < 8 * kps.size(); ++i) total += h_GPUdesc[i];
-	std::cout << "Checksum: " << total << std::endl << std::endl;
+	std::cout << "Checksum: " << std::hex << total << std::endl << std::endl;
 }

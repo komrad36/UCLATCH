@@ -52,7 +52,7 @@ UCLATCH_kernel(const cudaTextureObject_t d_img_tex, const cudaTextureObject_t d_
 	for (uint32_t i = 0; i <= 48; i += 16) for (uint32_t k = 0; k <= 32; k += 32) s_ROI[(threadIdx.y + i) * 72 + threadIdx.x + k] = tex2D<uint8_t>(d_img_tex, pt.x + threadIdx.x + k - 32, pt.y + threadIdx.y - 32 + i);
 	uint32_t ROI_base = 144 * (threadIdx.x & 3) + (threadIdx.x >> 2), triplet_base = threadIdx.y << 5, desc = 0;
 	__syncthreads();
-	for (uint32_t i = 0; i < 4; ++i, triplet_base += 8) {
+	for (int32_t i = 0; i < 4; ++i, triplet_base += 8) {
 		int32_t accum[8];
 		for (uint32_t j = 0; j < 8; ++j) {
 			const ushort4 t = tex1D<ushort4>(d_triplets, triplet_base + j);
@@ -63,10 +63,10 @@ UCLATCH_kernel(const cudaTextureObject_t d_img_tex, const cudaTextureObject_t d_
 		}
 		for (int32_t k = 1; k <= 4; k <<= 1) {
 			for (int32_t s = 0; s < 8; s += k) accum[s] += __shfl_xor(accum[s], k);
-			if (threadIdx.x & k) for (int32_t s = 0; s < 8; s += (k << 1)) accum[s] = accum[s + k];
+			if (threadIdx.x & k) for (int32_t s = 0; s < 8; s += k << 1) accum[s] = accum[s + k];
 		}		
 		accum[0] += __shfl_xor(accum[0], 8);
-		desc |= (accum[0] + __shfl_xor(accum[0], 16) < 0) << ((i << 3) + (threadIdx.x & 15));
+		desc |= (accum[0] + __shfl_xor(accum[0], 16) < 0) << ((i << 3) + (threadIdx.x & 7));
 	}
 	for (int32_t s = 1; s <= 4; s <<= 1) desc |= __shfl_xor(desc, s);
 	if (threadIdx.x == 0) d_desc[(blockIdx.x << 4) + threadIdx.y] = desc;
