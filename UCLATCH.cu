@@ -20,8 +20,12 @@
 // See also the ECCV 2016 Descriptor Workshop paper, of which I am a coauthor:
 //
 // "The CUDA LATCH Binary Descriptor"
+// http://arxiv.org/abs/1609.03986
 //
-// Note once again that this is an UPRIGHT CUDA LATCH, a.k.a. UCLATCH.
+// And the original LATCH project's website:
+// http://www.openu.ac.il/home/hassner/projects/LATCH/
+//
+// Note once again that this is an UPRIGHT LATCH, a.k.a. ULATCH.
 // A fast rotation- and scale-invariant version is in the works.
 //
 // This implementation is insanely fast, matching or beating
@@ -30,7 +34,7 @@
 //
 // A key insight responsible for much of the performance of
 // this laboriously crafted CUDA kernel is due to
-// Christopher Parker (https://github.com/csp256), to whom
+// Christopher Parker (https://github.com/csp256) to whom
 // I am extremely grateful.
 //
 // CUDA CC 3.0 or higher is required.

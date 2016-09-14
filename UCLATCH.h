@@ -20,6 +20,10 @@
 // See also the ECCV 2016 Descriptor Workshop paper, of which I am a coauthor:
 //
 // "The CUDA LATCH Binary Descriptor"
+// http://arxiv.org/abs/1609.03986
+//
+// And the original LATCH project's website:
+// http://www.openu.ac.il/home/hassner/projects/LATCH/
 //
 // Note once again that this is an UPRIGHT LATCH, a.k.a. ULATCH.
 // A fast rotation- and scale-invariant version is in the works.
