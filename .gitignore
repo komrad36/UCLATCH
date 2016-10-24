@@ -6,3 +6,5 @@
 !Makefile
 !main.cpp
 !README.md
+!CMakeLists.txt
+!default.nix
