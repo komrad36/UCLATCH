@@ -55,7 +55,8 @@ UCLATCH_kernel(const cudaTextureObject_t d_img_tex, const cudaTextureObject_t d_
 	volatile __shared__ uint8_t s_ROI[4608];
 	const uint2 pt = tex1D<uint2>(d_kps, blockIdx.x);
 	for (uint32_t i = 0; i <= 48; i += 16) for (uint32_t k = 0; k <= 32; k += 32) s_ROI[(threadIdx.y + i) * 72 + threadIdx.x + k] = tex2D<uint8_t>(d_img_tex, pt.x + threadIdx.x + k - 32, pt.y + threadIdx.y - 32 + i);
-	uint32_t ROI_base = 144 * (threadIdx.x & 3) + (threadIdx.x >> 2), triplet_base = threadIdx.y << 5, desc = 0;
+	const uint32_t ROI_base = 144 * (threadIdx.x & 3) + (threadIdx.x >> 2);
+  uint32_t triplet_base = threadIdx.y << 5, desc = 0;
 	__syncthreads();
 	for (int32_t i = 0; i < 4; ++i, triplet_base += 8) {
 		int32_t accum[8];
